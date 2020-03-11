@@ -28,6 +28,7 @@ Role Variables
 | sensu_cli_username           | true     | `admin`                           | string    | Should match username set in sensu backend.   |
 | sensu_cli_password           | true     | `P@ssw0rd!`                       | string    | Should match password set in sensu backend.   |
 | sensu_cli_format             | true     | `json`                            | string    | One of: tabular, wrapped-json, yaml, json.    |
+| sensu_cli_assets             | true     | `[]`                              | list      | Assets to install from Bonsai.                |
 
 Dependencies
 ------------
@@ -40,6 +41,11 @@ Example Playbook
     - hosts: all
       roles:
         - role: ansible-role-sensu-go-cli
+          sensu_cli_assets:
+            - name: sensu/sensu-slack-handler:1.0.3
+              rename: sensu-slack-handler
+            - name: sensu-plugins/sensu-plugins-cpu-checks
+
 
 Testing
 -------

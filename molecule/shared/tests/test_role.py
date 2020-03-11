@@ -28,3 +28,18 @@ def test_sensuctl_is_configured(host, api_url, format, namespace, username):
     assert config['format'] == format
     assert config['namespace'] == namespace
     assert config['username'] == username
+
+
+@pytest.mark.parametrize('name', [
+  ('sensu-plugins/sensu-plugins-cpu-checks'),
+  ('sensu-slack-handler'),
+])
+def test_assets_are_installed(host, name):
+    json_data = host.check_output('sensuctl asset list')
+    assets = json.loads(json_data)
+    for asset in assets:
+        if asset['metadata']['name'] == name:
+            assert True
+            break
+    else:
+        assert False

@@ -1,38 +1,6 @@
 ---
-- name: Install dependencies
-  apt:
-    name: "{{ sensu_cli_dependencies }}"
-    state: present
+- include_tasks: install.yml
 
-- name: Add Sensu APT key
-  apt_key:
-    state: present
-    url: "{{ sensu_cli_apt_key }}"
+- include_tasks: configure.yml
 
-- name: Manage Sensu APT repositories
-  apt_repository:
-    repo: "{{ item }}"
-    state: present
-  loop: "{{ sensu_cli_apt_repositories }}"
-
-- name: Install Sensuctl
-  apt:
-    name: "{{ sensu_cli_package_name }}"
-    state: "{{ sensu_cli_package_state }}"
-
-- name: Check if Sensuctl is already configured
-  command: sensuctl --namespace {{ sensu_cli_namespace }} config view
-  changed_when: false
-  ignore_errors: true
-  no_log: true
-  register: _sensuctl_config
-
-- name: Configure Sensuctl
-  command: >
-    sensuctl --namespace {{ sensu_cli_namespace }} configure
-      -n
-      --url {{ sensu_cli_backend_url }}
-      --username {{ sensu_cli_username }}
-      --password {{ sensu_cli_password }}
-      --format {{ sensu_cli_format }}
-  when: _sensuctl_config.rc != 0
+- include_tasks: assets.yml

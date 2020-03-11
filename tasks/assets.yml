@@ -1,0 +1,8 @@
+---
+- name: Install assets
+  command: >
+    sensuctl --namespace {{ sensu_cli_namespace }} asset add
+      {{ item.name }}
+      {{ '-r' ~ item.rename if item.rename is defined else '' }}
+  changed_when: false
+  loop: "{{ sensu_cli_assets }}"
