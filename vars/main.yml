@@ -1,0 +1,8 @@
+---
+sensu_cli_apt_key: https://packagecloud.io/sensu/stable/gpgkey
+
+sensu_cli_apt_repositories:
+  - deb https://packagecloud.io/sensu/stable/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main
+  - deb-src https://packagecloud.io/sensu/stable/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main
+
+sensu_cli_package_name: sensu-go-cli

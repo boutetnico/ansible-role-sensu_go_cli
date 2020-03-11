@@ -1,0 +1,13 @@
+---
+sensu_cli_dependencies:
+  - apt-transport-https
+  - curl
+  - gnupg
+
+sensu_cli_package_state: present
+
+sensu_cli_backend_url: http://127.0.0.1:8080
+sensu_cli_namespace: default
+sensu_cli_username: admin
+sensu_cli_password: P@ssw0rd!
+sensu_cli_format: json
