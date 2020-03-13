@@ -28,6 +28,7 @@ Role Variables
 | sensu_cli_password           | true     | `P@ssw0rd!`                       | string    | Should match password set in sensu backend.   |
 | sensu_cli_format             | true     | `json`                            | string    | One of: tabular, wrapped-json, yaml, json.    |
 | sensu_cli_assets             | true     | `[]`                              | list      | Assets to install from Bonsai.                |
+| sensu_cli_checks             | true     | `[]`                              | list      | Configure checks.                             |
 
 Dependencies
 ------------
@@ -46,6 +47,15 @@ Example Playbook
             - name: sensu/sensu-slack-handler:1.0.3
               rename: sensu-slack-handler
             - name: sensu-plugins/sensu-plugins-cpu-checks
+          sensu_cli_checks:
+            - name: check-cpu
+              command: check-cpu.rb -w 75 -c 90
+              interval: 60
+              subscriptions:
+                - system
+              assets:
+                - cpu-checks-plugins
+                - sensu-ruby-runtime
 
 
 Testing

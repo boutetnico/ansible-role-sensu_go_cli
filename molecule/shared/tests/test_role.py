@@ -46,3 +46,18 @@ def test_assets_are_installed(host, name, version):
             break
     else:
         assert False
+
+
+@pytest.mark.parametrize('name', [
+  ('check-cpu'),
+])
+def test_checks_are_installed(host, name):
+    json_data = host.check_output('sensuctl check list')
+    checks = json.loads(json_data)
+    for check in checks:
+        metadata = check['metadata']
+        if metadata['name'] == name:
+            assert True
+            break
+    else:
+        assert False

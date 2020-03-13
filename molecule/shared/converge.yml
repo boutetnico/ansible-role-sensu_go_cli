@@ -12,3 +12,12 @@
         - name: sensu/sensu-ruby-runtime
           rename: sensu-ruby-runtime
           version: 0.0.10
+      sensu_cli_checks:
+        - name: check-cpu
+          command: check-cpu.rb -w 75 -c 90
+          interval: 60
+          subscriptions:
+            - system
+          assets:
+            - cpu-checks-plugins
+            - sensu-ruby-runtime

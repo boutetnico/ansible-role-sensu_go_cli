@@ -1,0 +1,31 @@
+---
+- name: Install checks
+  sensu.sensu_go.check:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    check_hooks: "{{ item.check_hooks | d(omit) }}"
+    command: "{{ item.command }}"
+    cron: "{{ item.cron | d(omit) }}"
+    env_vars: "{{ item.env_vars | d(omit) }}"
+    handlers: "{{ item.handlers | d(omit) }}"
+    high_flap_threshold: "{{ item.high_flap_threshold | d(omit) }}"
+    interval: "{{ item.interval | d(omit) }}"
+    labels: "{{ item.labels | d(omit) }}"
+    low_flap_threshold: "{{ item.low_flap_threshold | d(omit) }}"
+    name: "{{ item.name }}"
+    namespace: "{{ sensu_cli_namespace }}"
+    output_metric_format: "{{ item.output_metric_format | d(omit) }}"
+    output_metric_handlers: "{{ item.output_metric_handlers | d(omit) }}"
+    proxy_entity_name: "{{ item.proxy_entity_name | d(omit) }}"
+    proxy_requests: "{{ item.proxy_requests | d(omit) }}"
+    publish: "{{ item.publish | d(omit) }}"
+    round_robin: "{{ item.round_robin | d(omit) }}"
+    runtime_assets: "{{ item.runtime_assets | d(omit) }}"
+    state: present
+    stdin: "{{ item.stdin | d(omit) }}"
+    subscriptions: "{{ item.subscriptions | d(omit) }}"
+    timeout: "{{ item.timeout | d(omit) }}"
+    ttl: "{{ item.ttl | d(omit) }}"
+  loop: "{{ sensu_cli_checks }}"

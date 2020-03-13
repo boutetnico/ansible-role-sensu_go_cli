@@ -4,3 +4,5 @@
 - include_tasks: configure.yml
 
 - include_tasks: assets.yml
+
+- include_tasks: checks.yml
