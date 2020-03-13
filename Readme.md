@@ -6,14 +6,13 @@ This role installs and configures [Sensuctl](https://docs.sensu.io/sensu-go/late
 Requirements
 ------------
 
-Ansible 2.6 or newer.
+Ansible 2.9 or newer.
+Python 3.6 or newer.
 
 Supported Platforms
 -------------------
 
-- [Debian - 9 (Stretch)](https://wiki.debian.org/DebianStretch)
 - [Debian - 10 (Buster)](https://wiki.debian.org/DebianBuster)
-- [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
 - [Ubuntu - 18.04 (Bionic Beaver)](http://releases.ubuntu.com/18.04/)
 
 Role Variables
