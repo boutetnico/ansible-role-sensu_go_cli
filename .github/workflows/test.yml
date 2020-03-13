@@ -38,5 +38,8 @@ jobs:
           ansible --version
           molecule --version
 
+      - name: Install Sensu Go Ansible Collection
+        run: ansible-galaxy collection install sensu.sensu_go
+
       - name: Run Molecule
         run: molecule --base-config molecule/shared/base.yml test --scenario-name ${{ matrix.scenario }}

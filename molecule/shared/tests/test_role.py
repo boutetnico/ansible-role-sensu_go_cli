@@ -30,16 +30,19 @@ def test_sensuctl_is_configured(host, api_url, format, namespace, username):
     assert config['username'] == username
 
 
-@pytest.mark.parametrize('name', [
-  ('sensu-plugins/sensu-plugins-cpu-checks'),
-  ('sensu-slack-handler'),
+@pytest.mark.parametrize('name,version', [
+  ('sensu-plugins-cpu-checks', '4.1.0'),
+  ('sensu-ruby-runtime', '0.0.10'),
+  ('sensu/sensu-slack-handler', '1.0.3'),
 ])
-def test_assets_are_installed(host, name):
+def test_assets_are_installed(host, name, version):
     json_data = host.check_output('sensuctl asset list')
     assets = json.loads(json_data)
     for asset in assets:
-        if asset['metadata']['name'] == name:
-            assert True
+        metadata = asset['metadata']
+        if metadata['name'] == name:
+            annotations = metadata['annotations']
+            assert annotations['io.sensu.bonsai.version'] == version
             break
     else:
         assert False

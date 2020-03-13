@@ -1,8 +1,12 @@
 ---
 - name: Install assets
-  command: >
-    sensuctl --namespace {{ sensu_cli_namespace }} asset add
-      {{ item.name }}
-      {{ '-r' ~ item.rename if item.rename is defined else '' }}
-  changed_when: false
+  sensu.sensu_go.bonsai_asset:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    name: "{{ item.name }}"
+    namespace: "{{ sensu_cli_namespace }}"
+    rename: "{{ item.rename | d(omit) }}"
+    version: "{{ item.version | d(omit) }}"
   loop: "{{ sensu_cli_assets }}"

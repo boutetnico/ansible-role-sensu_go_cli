@@ -33,7 +33,9 @@ Role Variables
 Dependencies
 ------------
 
-None
+This role relies on modules from [Sensu Go Ansible Collection](https://sensu.github.io/sensu-go-ansible/installation.html). You can install this collection using the following command:
+
+    ansible-galaxy collection install sensu.sensu_go
 
 Example Playbook
 ----------------

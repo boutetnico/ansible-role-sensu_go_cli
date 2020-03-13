@@ -4,6 +4,11 @@
   roles:
     - role: ansible-role-sensu-go-cli
       sensu_cli_assets:
-        - name: sensu/sensu-slack-handler:1.0.3
-          rename: sensu-slack-handler
+        - name: sensu/sensu-slack-handler
+          version: 1.0.3
         - name: sensu-plugins/sensu-plugins-cpu-checks
+          rename: sensu-plugins-cpu-checks
+          version: 4.1.0
+        - name: sensu/sensu-ruby-runtime
+          rename: sensu-ruby-runtime
+          version: 0.0.10
