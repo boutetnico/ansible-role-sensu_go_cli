@@ -1,0 +1,48 @@
+---
+- name: Install pipe handlers
+  sensu.sensu_go.pipe_handler:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    command: "{{ item.command }}"
+    env_vars: "{{ item.env_vars | d(omit) }}"
+    filters: "{{ item.filters | d(omit) }}"
+    labels: "{{ item.labels | d(omit) }}"
+    mutator: "{{ item.mutator | d(omit) }}"
+    name: "{{ item.name }}"
+    namespace: "{{ sensu_cli_namespace }}"
+    runtime_assets: "{{ item.runtime_assets | d(omit) }}"
+    state: present
+    timeout: "{{ item.timeout | d(omit) }}"
+  loop: "{{ sensu_cli_pipe_handlers }}"
+
+- name: Install socket handlers
+  sensu.sensu_go.socket_handler:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    filters: "{{ item.fiters | d(omit) }}"
+    host: "{{ item.host }}"
+    labels: "{{ item.labels | d(omit) }}"
+    mutator: "{{ item.mutator | d(omit) }}"
+    name: "{{ item.name }}"
+    namespace: "{{ sensu_cli_namespace }}"
+    port: "{{ item.port }}"
+    state: present
+    type: "{{ item.type }}"
+  loop: "{{ sensu_cli_socket_handlers }}"
+
+- name: Install handler sets
+  sensu.sensu_go.handler_set:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    handlers: "{{ item.handlers }}"
+    labels: "{{ item.labels | d(omit) }}"
+    name: "{{ item.name }}"
+    namespace: "{{ sensu_cli_namespace }}"
+    state: present
+  loop: "{{ sensu_cli_handler_sets }}"

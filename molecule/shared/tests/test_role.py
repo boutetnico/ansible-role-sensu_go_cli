@@ -48,6 +48,23 @@ def test_assets_are_installed(host, name, version):
         assert False
 
 
+@pytest.mark.parametrize('name,type', [
+  ('slack', 'pipe'),
+  ('tcp_handler', 'tcp'),
+  ('keepalive', 'set'),
+])
+def test_handlers_are_installed(host, name, type):
+    json_data = host.check_output('sensuctl handler list')
+    handlers = json.loads(json_data)
+    for handler in handlers:
+        metadata = handler['metadata']
+        if metadata['name'] == name:
+            assert handler['type'] == type
+            break
+    else:
+        assert False
+
+
 @pytest.mark.parametrize('name', [
   ('check-cpu'),
 ])

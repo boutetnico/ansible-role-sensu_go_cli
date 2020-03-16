@@ -3,6 +3,7 @@
   hosts: all
   roles:
     - role: ansible-role-sensu-go-cli
+
       sensu_cli_assets:
         - name: sensu/sensu-slack-handler
           version: 1.0.3
@@ -12,12 +13,32 @@
         - name: sensu/sensu-ruby-runtime
           rename: sensu-ruby-runtime
           version: 0.0.10
+
+      sensu_cli_pipe_handlers:
+        - name: slack
+          env_vars:
+            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/T0000/B000/XXXXXXXX
+          command: sensu-slack-handler --channel '#monitoring'
+          runtime_assets:
+            - sensu-slack-handler
+
+      sensu_cli_socket_handlers:
+        - name: tcp_handler
+          type: tcp
+          host: 10.0.1.99
+          port: 4444
+
+      sensu_cli_handler_sets:
+        - name: keepalive
+          handlers:
+            - slack
+
       sensu_cli_checks:
         - name: check-cpu
           command: check-cpu.rb -w 75 -c 90
           interval: 60
           subscriptions:
             - system
-          assets:
+          runtime_assets:
             - cpu-checks-plugins
             - sensu-ruby-runtime
