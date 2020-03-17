@@ -47,9 +47,16 @@ Example Playbook
       roles:
         - role: ansible-role-sensu-go-cli
           sensu_cli_assets:
-            - name: sensu/sensu-slack-handler:1.0.3
-              rename: sensu-slack-handler
+            - name: sensu/sensu-slack-handler
+              version: 1.0.3
             - name: sensu-plugins/sensu-plugins-cpu-checks
+              rename: sensu-plugins-cpu-checks
+              version: 4.1.0
+            - name: sensu/sensu-ruby-runtime
+              rename: sensu-ruby-runtime
+              version: 0.0.10
+            - name: sensu-plugins/sensu-plugins-http
+              version: 6.0.0
           sensu_cli_pipe_handlers:
             - name: slack
               env_vars:
@@ -67,13 +74,40 @@ Example Playbook
               handlers:
                 - slack
           sensu_cli_checks:
-            - name: check-cpu
+            - name: check-cpu-interval
               command: check-cpu.rb -w 75 -c 90
               interval: 60
               subscriptions:
                 - system
               runtime_assets:
                 - cpu-checks-plugins
+                - sensu-ruby-runtime
+            - name: check-cpu-cron
+              command: check-cpu.rb -w 75 -c 90
+              cron: '* * * * *'
+              subscriptions:
+                - system
+              runtime_assets:
+                - cpu-checks-plugins
+                - sensu-ruby-runtime
+            - name: check-cpu-ad-hoc
+              command: check-cpu.rb -w 75 -c 90
+              interval: 60
+              publish: false
+              subscriptions:
+                - system
+              runtime_assets:
+                - cpu-checks-plugins
+                - sensu-ruby-runtime
+            - name: check-http-proxy
+              command: http_check.sh https://sensu.io
+              interval: 60
+              proxy_entity_name: sensu-site
+              round_robin: true
+              subscriptions:
+                - system
+              runtime_assets:
+                - sensu-plugins-http
                 - sensu-ruby-runtime
 
 

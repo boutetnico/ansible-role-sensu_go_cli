@@ -34,6 +34,7 @@ def test_sensuctl_is_configured(host, api_url, format, namespace, username):
   ('sensu-plugins-cpu-checks', '4.1.0'),
   ('sensu-ruby-runtime', '0.0.10'),
   ('sensu/sensu-slack-handler', '1.0.3'),
+  ('sensu-plugins/sensu-plugins-http', '6.0.0'),
 ])
 def test_assets_are_installed(host, name, version):
     json_data = host.check_output('sensuctl asset list')
@@ -66,7 +67,10 @@ def test_handlers_are_installed(host, name, type):
 
 
 @pytest.mark.parametrize('name', [
-  ('check-cpu'),
+  ('check-cpu-interval'),
+  ('check-cpu-cron'),
+  ('check-cpu-ad-hoc'),
+  ('check-http-proxy'),
 ])
 def test_checks_are_installed(host, name):
     json_data = host.check_output('sensuctl check list')

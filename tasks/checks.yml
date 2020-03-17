@@ -20,7 +20,7 @@
     output_metric_handlers: "{{ item.output_metric_handlers | d(omit) }}"
     proxy_entity_name: "{{ item.proxy_entity_name | d(omit) }}"
     proxy_requests: "{{ item.proxy_requests | d(omit) }}"
-    publish: "{{ item.publish | d(omit) }}"
+    publish: "{{ item.publish | d(true) }}"
     round_robin: "{{ item.round_robin | d(omit) }}"
     runtime_assets: "{{ item.runtime_assets | d(omit) }}"
     state: present
