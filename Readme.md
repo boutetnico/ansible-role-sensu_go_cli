@@ -116,12 +116,10 @@ Testing
 
 ## Debian
 
-    molecule --base-config molecule/shared/base.yml test --scenario-name debian-9
     molecule --base-config molecule/shared/base.yml test --scenario-name debian-10
 
 ## Ubuntu
 
-    molecule --base-config molecule/shared/base.yml test --scenario-name ubuntu-1604
     molecule --base-config molecule/shared/base.yml test --scenario-name ubuntu-1804
 
 License
