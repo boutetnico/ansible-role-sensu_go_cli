@@ -1,7 +1,6 @@
 ---
 sensu_cli_dependencies:
   - apt-transport-https
-  - curl
   - gnupg
 
 sensu_cli_package_state: present
