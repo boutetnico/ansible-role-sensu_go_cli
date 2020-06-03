@@ -49,6 +49,21 @@ def test_assets_are_installed(host, name, version):
         assert False
 
 
+@pytest.mark.parametrize('name', [
+  ('filter_interval_60_hourly'),
+])
+def test_filters_are_installed(host, name):
+    json_data = host.check_output('sensuctl filter list')
+    checks = json.loads(json_data)
+    for check in checks:
+        metadata = check['metadata']
+        if metadata['name'] == name:
+            assert True
+            break
+    else:
+        assert False
+
+
 @pytest.mark.parametrize('name,type', [
   ('slack', 'pipe'),
   ('tcp_handler', 'tcp'),
