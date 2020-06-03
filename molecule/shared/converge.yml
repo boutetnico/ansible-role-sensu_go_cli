@@ -16,11 +16,20 @@
         - name: sensu-plugins/sensu-plugins-http
           version: 6.0.0
 
+      sensu_cli_filters:
+        - name: filter_interval_60_hourly
+          action: allow
+          expressions:
+            - event.check.interval == 60
+            - event.check.occurrences == 1 || event.check.occurrences % 60 == 0
+
       sensu_cli_pipe_handlers:
         - name: slack
           env_vars:
             SLACK_WEBHOOK_URL: https://hooks.slack.com/services/T0000/B000/XXXXXXXX
           command: sensu-slack-handler --channel '#monitoring'
+          filters:
+            - filter_interval_60_hourly
           runtime_assets:
             - sensu-slack-handler
 

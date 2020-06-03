@@ -34,6 +34,7 @@ Role Variables
 | sensu_cli_password           | true     | `P@ssw0rd!`                   | string    | Should match password set in sensu backend.   |
 | sensu_cli_format             | true     | `json`                        | string    | One of: tabular, wrapped-json, yaml, json.    |
 | sensu_cli_assets             | true     | `[]`                          | list      | Assets to install from Bonsai.                |
+| sensu_cli_filters            | true     | `[]`                          | list      | Configure filters.                            |
 | sensu_cli_pipe_handlers      | true     | `[]`                          | list      | Configure pipe handlers.                      |
 | sensu_cli_socket_handlers    | true     | `[]`                          | list      | Configure socket handlers.                    |
 | sensu_cli_handler_sets       | true     | `[]`                          | list      | Configure handler sets.                       |
@@ -63,6 +64,14 @@ Example Playbook
               version: 0.0.10
             - name: sensu-plugins/sensu-plugins-http
               version: 6.0.0
+
+          sensu_cli_filters:
+            - name: filter_interval_60_hourly
+              action: allow
+              expressions:
+                - event.check.interval == 60
+                - event.check.occurrences == 1 || event.check.occurrences % 60 == 0
+
           sensu_cli_pipe_handlers:
             - name: slack
               env_vars:
@@ -70,15 +79,18 @@ Example Playbook
               command: sensu-slack-handler --channel '#monitoring'
               runtime_assets:
                 - sensu-slack-handler
+
           sensu_cli_socket_handlers:
             - name: tcp_handler
               type: tcp
               host: 10.0.1.99
               port: 4444
+
           sensu_cli_handler_sets:
             - name: keepalive
               handlers:
                 - slack
+
           sensu_cli_checks:
             - name: check-cpu-interval
               command: check-cpu.rb -w 75 -c 90
@@ -115,7 +127,6 @@ Example Playbook
               runtime_assets:
                 - sensu-plugins-http
                 - sensu-ruby-runtime
-
 
 Testing
 -------

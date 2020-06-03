@@ -5,6 +5,8 @@
 
 - include_tasks: assets.yml
 
+- include_tasks: filters.yml
+
 - include_tasks: handlers.yml
 
 - include_tasks: checks.yml

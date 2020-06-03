@@ -1,0 +1,15 @@
+---
+- name: Install filters
+  sensu.sensu_go.filter:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    action: "{{ item.action }}"
+    expressions: "{{ item.expressions }}"
+    labels: "{{ item.labels | d(omit) }}"
+    name: "{{ item.name }}"
+    namespace: "{{ sensu_cli_namespace }}"
+    runtime_assets: "{{ item.runtime_assets | d(omit) }}"
+    state: present
+  loop: "{{ sensu_cli_filters }}"
