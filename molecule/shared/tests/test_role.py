@@ -104,10 +104,9 @@ def test_checks_are_installed(host, name):
 ])
 def test_users_exist(host, name):
     json_data = host.check_output('sensuctl user list')
-    checks = json.loads(json_data)
-    for check in checks:
-        metadata = check['metadata']
-        if metadata['name'] == name:
+    users = json.loads(json_data)
+    for user in users:
+        if user['username'] == name:
             assert True
             break
     else:
@@ -120,9 +119,9 @@ def test_users_exist(host, name):
 ])
 def test_role_bindings_exist(host, name):
     json_data = host.check_output('sensuctl role-binding list')
-    checks = json.loads(json_data)
-    for check in checks:
-        metadata = check['metadata']
+    role_bindings = json.loads(json_data)
+    for role_binding in role_bindings:
+        metadata = role_binding['metadata']
         if metadata['name'] == name:
             assert True
             break
