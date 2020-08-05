@@ -24,21 +24,23 @@ Supported Platforms
 Role Variables
 --------------
 
-| Variable                     | Required | Default                       | Choices   | Comments                                      |
-|------------------------------|----------|-------------------------------|-----------|-----------------------------------------------|
-| sensu_cli_dependencies       | true     | `[apt-transport-https,gnupg]` | list      |                                               |
-| sensu_cli_package_state      | true     | `present`                     | string    | Use  `latest` to upgrade.                     |
-| sensu_cli_backend_url        | true     | `http://127.0.0.1:8080`       | string    | Url to sensu backend API.                     |
-| sensu_cli_namespace          | true     | `default`                     | string    |                                               |
-| sensu_cli_username           | true     | `admin`                       | string    | Should match username set in sensu backend.   |
-| sensu_cli_password           | true     | `P@ssw0rd!`                   | string    | Should match password set in sensu backend.   |
-| sensu_cli_format             | true     | `json`                        | string    | One of: tabular, wrapped-json, yaml, json.    |
-| sensu_cli_assets             | true     | `[]`                          | list      | Assets to install from Bonsai.                |
-| sensu_cli_filters            | true     | `[]`                          | list      | Configure filters.                            |
-| sensu_cli_pipe_handlers      | true     | `[]`                          | list      | Configure pipe handlers.                      |
-| sensu_cli_socket_handlers    | true     | `[]`                          | list      | Configure socket handlers.                    |
-| sensu_cli_handler_sets       | true     | `[]`                          | list      | Configure handler sets.                       |
-| sensu_cli_checks             | true     | `[]`                          | list      | Configure checks.                             |
+| Variable                  | Req. | Default                       | Type   | Comments                                    |
+|---------------------------|------|-------------------------------|--------|---------------------------------------------|
+| sensu_cli_dependencies    | true | `[apt-transport-https,gnupg]` | list   |                                             |
+| sensu_cli_package_state   | true | `present`                     | string | Use  `latest` to upgrade.                   |
+| sensu_cli_backend_url     | true | `http://127.0.0.1:8080`       | string | Url to sensu backend API.                   |
+| sensu_cli_namespace       | true | `default`                     | string |                                             |
+| sensu_cli_username        | true | `admin`                       | string | Should match username set in sensu backend. |
+| sensu_cli_password        | true | `P@ssw0rd!`                   | string | Should match password set in sensu backend. |
+| sensu_cli_format          | true | `json`                        | string | One of: tabular, wrapped-json, yaml, json.  |
+| sensu_cli_assets          | true | `[]`                          | list   | Assets to install from Bonsai.              |
+| sensu_cli_filters         | true | `[]`                          | list   | Configure filters.                          |
+| sensu_cli_pipe_handlers   | true | `[]`                          | list   | Configure pipe handlers.                    |
+| sensu_cli_socket_handlers | true | `[]`                          | list   | Configure socket handlers.                  |
+| sensu_cli_handler_sets    | true | `[]`                          | list   | Configure handler sets.                     |
+| sensu_cli_checks          | true | `[]`                          | list   | Configure checks.                           |
+| sensu_cli_users           | true | `[]`                          | list   | Configure users.                            |
+| sensu_cli_role_bindings   | true | `[]`                          | list   | Configure role bindings.                    |
 
 Dependencies
 ------------
@@ -127,6 +129,28 @@ Example Playbook
               runtime_assets:
                 - sensu-plugins-http
                 - sensu-ruby-runtime
+
+          sensu_cli_users:
+            - name: awesome_username
+              password: hidden_password?
+              groups:
+                - dev
+                - prod
+
+          sensu_cli_role_bindings:
+            - name: dev_and_testing
+              role: testers_permissive
+              groups:
+                - testers
+                - dev
+                - ops
+              users:
+                - alice
+            - name: org-admins
+              cluster_role: admin
+              groups:
+                - team1-admins
+                - team2-admins
 
 Testing
 -------

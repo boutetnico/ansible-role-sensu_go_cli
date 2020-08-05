@@ -1,0 +1,26 @@
+---
+- name: Create users
+  sensu.sensu_go.user:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    groups: "{{ item.groups | d(omit) }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    state: enabled
+  loop: "{{ sensu_cli_users }}"
+
+- name: Create role bindings
+  sensu.sensu_go.role_binding:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    cluster_role: "{{ item.cluster_role | d(omit) }}"
+    groups: "{{ item.groups | d(omit) }}"
+    name: "{{ item.name }}"
+    role: "{{ item.role | d(omit) }}"
+    state: present
+    users: "{{ item.users | d(omit) }}"
+  loop: "{{ sensu_cli_role_bindings }}"
