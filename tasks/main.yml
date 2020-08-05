@@ -10,3 +10,5 @@
 - include_tasks: handlers.yml
 
 - include_tasks: checks.yml
+
+- include_tasks: rbac.yml
