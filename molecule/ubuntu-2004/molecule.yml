@@ -1,0 +1,13 @@
+---
+platforms:
+  - name: ansible-role-sensu-go-cli-ubuntu-2004
+    image: ubuntu:20.04
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: host
+    privileged: true
