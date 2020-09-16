@@ -20,6 +20,7 @@ Supported Platforms
 
 - [Debian - 10 (Buster)](https://wiki.debian.org/DebianBuster)
 - [Ubuntu - 18.04 (Bionic Beaver)](http://releases.ubuntu.com/18.04/)
+- [Ubuntu - 20.04 (Bionic Beaver)](http://releases.ubuntu.com/20.04/)
 
 Role Variables
 --------------
@@ -162,6 +163,7 @@ Testing
 ## Ubuntu
 
     molecule --base-config molecule/shared/base.yml test --scenario-name ubuntu-1804
+    molecule --base-config molecule/shared/base.yml test --scenario-name ubuntu-2004
 
 License
 -------

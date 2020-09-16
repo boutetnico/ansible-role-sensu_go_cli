@@ -14,6 +14,7 @@ jobs:
         scenario:
           - debian-10
           - ubuntu-1804
+          - ubuntu-2004
 
     steps:
 
