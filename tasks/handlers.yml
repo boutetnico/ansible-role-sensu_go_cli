@@ -1,6 +1,7 @@
 ---
 - name: Install pipe handlers
   sensu.sensu_go.pipe_handler:
+    annotations: "{{ item.annotations | d(omit) }}"
     auth:
       password: "{{ sensu_cli_password }}"
       url: "{{ sensu_cli_backend_url }}"
@@ -19,6 +20,7 @@
 
 - name: Install socket handlers
   sensu.sensu_go.socket_handler:
+    annotations: "{{ item.annotations | d(omit) }}"
     auth:
       password: "{{ sensu_cli_password }}"
       url: "{{ sensu_cli_backend_url }}"
@@ -36,6 +38,7 @@
 
 - name: Install handler sets
   sensu.sensu_go.handler_set:
+    annotations: "{{ item.annotations | d(omit) }}"
     auth:
       password: "{{ sensu_cli_password }}"
       url: "{{ sensu_cli_backend_url }}"
