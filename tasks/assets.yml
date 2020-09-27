@@ -1,6 +1,7 @@
 ---
 - name: Install assets
   sensu.sensu_go.bonsai_asset:
+    annotations: "{{ item.annotations | d(omit) }}"
     auth:
       password: "{{ sensu_cli_password }}"
       url: "{{ sensu_cli_backend_url }}"
