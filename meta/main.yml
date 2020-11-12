@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: sensu-go-cli
   author: Nicolas Boutet
   description: Install Sensu Go cli utility Sensuctl.
   license: MIT
@@ -13,7 +14,9 @@ galaxy_info:
       versions:
         - buster
   galaxy_tags:
+    - client
+    - monitoring
     - sensu
-    - sensugo
     - sensuctl
+    - sensugo
 dependencies: []
