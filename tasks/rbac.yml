@@ -7,9 +7,11 @@
       user: "{{ sensu_cli_username }}"
     groups: "{{ item.groups | d(omit) }}"
     name: "{{ item.name }}"
-    password: "{{ item.password }}"
+    password_hash: "{{ item.password_hash | d(omit) }}"
+    password: "{{ item.password | d(omit) }}"
     state: enabled
   loop: "{{ sensu_cli_users }}"
+  changed_when: false  # Required as the module fails to inform about changes when using a hash
 
 - name: Create role bindings
   sensu.sensu_go.role_binding:

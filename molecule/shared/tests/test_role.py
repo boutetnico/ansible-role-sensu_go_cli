@@ -101,6 +101,7 @@ def test_checks_are_installed(host, name):
 
 @pytest.mark.parametrize('name', [
   ('awesome_username'),
+  ('user_with_hashed_password'),
 ])
 def test_users_exist(host, name):
     json_data = host.check_output('sensuctl user list')

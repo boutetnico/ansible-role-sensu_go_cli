@@ -95,6 +95,11 @@ sensu_cli_users: []
 #   groups:
 #     - dev
 #     - prod
+# - name: user_with_hashed_password
+#   password_hash: $5f$14$.brXRviMZpbaleSq9kjoUuwm67V/s4IziOLGHjEqxJbzPsreQAyNm
+#   groups:
+#     - dev
+#     - prod
 
 sensu_cli_role_bindings: []
 # - name: dev_and_testing
