@@ -30,8 +30,8 @@ def test_sensuctl_is_configured(host, api_url, format, namespace, username):
     assert config['username'] == username
 
 
-@pytest.mark.parametrize('api_url,opt_out', [
-  ('http://127.0.0.1:8080', 'true'),
+@pytest.mark.parametrize('opt_out', [
+  ('true'),
 ])
 def test_tessen_is_configured(host, opt_out):
     json_data = host.check_output('sensuctl tessen info')
