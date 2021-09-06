@@ -1,0 +1,8 @@
+---
+- name: Configure Tessen
+  sensu.sensu_go.tessen:
+    auth:
+      password: "{{ sensu_cli_password }}"
+      url: "{{ sensu_cli_backend_url }}"
+      user: "{{ sensu_cli_username }}"
+    state: "{{ sensu_cli_tessen_state }}"

@@ -36,6 +36,7 @@ Role Variables
 | sensu_cli_namespace       | true | `default`                     | string |                                             |
 | sensu_cli_username        | true | `admin`                       | string | Should match username set in sensu backend. |
 | sensu_cli_password        | true | `P@ssw0rd!`                   | string | Should match password set in sensu backend. |
+| sensu_cli_tessen_state    | true | `disabled`                    | string | `enabled` or `disabled`.                    |
 | sensu_cli_format          | true | `json`                        | string | One of: tabular, wrapped-json, yaml, json.  |
 | sensu_cli_assets          | true | `[]`                          | list   | Assets to install from Bonsai.              |
 | sensu_cli_filters         | true | `[]`                          | list   | Configure filters.                          |

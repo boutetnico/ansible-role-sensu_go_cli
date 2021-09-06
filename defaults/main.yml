@@ -12,6 +12,8 @@ sensu_cli_username: admin
 sensu_cli_password: P@ssw0rd!
 sensu_cli_format: json
 
+sensu_cli_tessen_state: disabled
+
 sensu_cli_assets: []
 # - name: sensu/sensu-slack-handler
 #   version: 1.0.3

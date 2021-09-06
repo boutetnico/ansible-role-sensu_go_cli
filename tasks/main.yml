@@ -3,6 +3,8 @@
 
 - include_tasks: configure.yml
 
+- include_tasks: tessen.yml
+
 - include_tasks: assets.yml
 
 - include_tasks: filters.yml
