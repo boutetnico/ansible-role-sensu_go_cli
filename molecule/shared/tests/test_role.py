@@ -31,7 +31,7 @@ def test_sensuctl_is_configured(host, api_url, format, namespace, username):
 
 
 @pytest.mark.parametrize('opt_out', [
-  ('true'),
+  (True),
 ])
 def test_tessen_is_configured(host, opt_out):
     json_data = host.check_output('sensuctl tessen info')
