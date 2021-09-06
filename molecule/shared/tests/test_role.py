@@ -30,6 +30,15 @@ def test_sensuctl_is_configured(host, api_url, format, namespace, username):
     assert config['username'] == username
 
 
+@pytest.mark.parametrize('api_url,opt_out', [
+  ('http://127.0.0.1:8080', 'true'),
+])
+def test_tessen_is_configured(host, opt_out):
+    json_data = host.check_output('sensuctl tessen info')
+    config = json.loads(json_data)
+    assert config['opt_out'] == opt_out
+
+
 @pytest.mark.parametrize('name,version', [
   ('sensu-plugins-cpu-checks', '4.1.0'),
   ('sensu-ruby-runtime', '0.0.10'),
