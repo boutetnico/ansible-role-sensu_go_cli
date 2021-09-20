@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  role_name: sensu-go-cli
+  role_name: sensu_go_cli
+  namespace: boutetnico
   author: Nicolas Boutet
   description: Install Sensu Go cli utility Sensuctl.
   license: MIT
