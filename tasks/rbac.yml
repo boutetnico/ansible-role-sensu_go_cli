@@ -11,6 +11,8 @@
     password: "{{ item.password | d(omit) }}"
     state: enabled
   loop: "{{ sensu_cli_users }}"
+  loop_control:
+    label: "{{ item.name }}"
   changed_when: false  # Required as the module fails to inform about changes when using a hash
 
 - name: Create role bindings
@@ -26,3 +28,5 @@
     state: present
     users: "{{ item.users | d(omit) }}"
   loop: "{{ sensu_cli_role_bindings }}"
+  loop_control:
+    label: "{{ item.name }}"

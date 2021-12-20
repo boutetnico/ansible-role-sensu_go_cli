@@ -11,3 +11,5 @@
     rename: "{{ item.rename | d(omit) }}"
     version: "{{ item.version | d(omit) }}"
   loop: "{{ sensu_cli_assets }}"
+  loop_control:
+    label: "{{ item.name }}"

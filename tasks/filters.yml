@@ -14,3 +14,5 @@
     runtime_assets: "{{ item.runtime_assets | d(omit) }}"
     state: present
   loop: "{{ sensu_cli_filters }}"
+  loop_control:
+    label: "{{ item.name }}"

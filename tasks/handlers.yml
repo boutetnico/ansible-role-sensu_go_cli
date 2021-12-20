@@ -17,6 +17,8 @@
     state: present
     timeout: "{{ item.timeout | d(omit) }}"
   loop: "{{ sensu_cli_pipe_handlers }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: Install socket handlers
   sensu.sensu_go.socket_handler:
@@ -35,6 +37,8 @@
     state: present
     type: "{{ item.type }}"
   loop: "{{ sensu_cli_socket_handlers }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: Install handler sets
   sensu.sensu_go.handler_set:
@@ -49,3 +53,5 @@
     namespace: "{{ sensu_cli_namespace }}"
     state: present
   loop: "{{ sensu_cli_handler_sets }}"
+  loop_control:
+    label: "{{ item.name }}"

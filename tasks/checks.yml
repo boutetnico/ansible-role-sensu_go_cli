@@ -30,3 +30,5 @@
     timeout: "{{ item.timeout | d(omit) }}"
     ttl: "{{ item.ttl | d(omit) }}"
   loop: "{{ sensu_cli_checks }}"
+  loop_control:
+    label: "{{ item.name }}"
