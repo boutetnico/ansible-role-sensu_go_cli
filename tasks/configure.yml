@@ -1,13 +1,13 @@
 ---
 - name: Check if Sensuctl is already configured
-  command: sensuctl --namespace {{ sensu_cli_namespace }} config view
+  ansible.builtin.command: sensuctl --namespace {{ sensu_cli_namespace }} config view
   changed_when: false
   ignore_errors: true
   no_log: true
   register: _sensuctl_config
 
 - name: Configure Sensuctl
-  command: >
+  ansible.builtin.command: >
     sensuctl --namespace {{ sensu_cli_namespace }} configure
       -n
       --url {{ sensu_cli_backend_url }}

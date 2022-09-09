@@ -1,7 +1,7 @@
 ---
 platforms:
-  - name: ansible-role-sensu-go-cli-ubuntu-1804
-    image: ubuntu:18.04
+  - name: ansible-role-sensu-go-cli-ubuntu-2204
+    image: ubuntu:22.04
     command: /lib/systemd/systemd
     tmpfs:
       - /run
