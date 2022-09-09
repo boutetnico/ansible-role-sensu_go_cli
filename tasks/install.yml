@@ -1,21 +1,21 @@
 ---
 - name: Install dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ sensu_cli_dependencies }}"
     state: present
 
 - name: Add Sensu APT key
-  apt_key:
+  ansible.builtin.apt_key:
     state: present
     url: "{{ sensu_cli_apt_key }}"
 
 - name: Manage Sensu APT repositories
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ item }}"
     state: present
   loop: "{{ sensu_cli_apt_repositories }}"
 
 - name: Install Sensuctl
-  apt:
+  ansible.builtin.apt:
     name: "{{ sensu_cli_package_name }}"
     state: "{{ sensu_cli_package_state }}"

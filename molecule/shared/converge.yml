@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   roles:
-    - role: ansible-role-sensu-go-cli
+    - role: boutetnico.sensu_go_cli
 
       sensu_cli_assets:
         - name: sensu/sensu-slack-handler
