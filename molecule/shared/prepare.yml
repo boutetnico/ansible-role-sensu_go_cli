@@ -17,7 +17,7 @@
     docker__pip_packages:
       - docker
 
-  pre_tasks:
+  tasks:
     - name: Install Docker's dependencies
       ansible.builtin.apt:
         name: "{{ docker__package_dependencies + docker__pip_dependencies }}"
@@ -44,5 +44,6 @@
         state: present
       loop: "{{ docker__pip_packages }}"
 
-  roles:
-    - role: ansible-role-sensu-go-backend
+    - name: Setup Sensu-go backend
+      ansible.builtin.include_role:
+        name: boutetnico.sensu_go_backend

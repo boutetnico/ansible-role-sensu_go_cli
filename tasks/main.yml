@@ -1,16 +1,24 @@
 ---
-- include_tasks: install.yml
+- name: Include install tasks
+  ansible.builtin.include_tasks: install.yml
 
-- include_tasks: configure.yml
+- name: Include configuration tasks
+  ansible.builtin.include_tasks: configure.yml
 
-- include_tasks: tessen.yml
+- name: Include Tessen tasks
+  ansible.builtin.include_tasks: tessen.yml
 
-- include_tasks: assets.yml
+- name: Include assets tasks
+  ansible.builtin.include_tasks: assets.yml
 
-- include_tasks: filters.yml
+- name: Include filters tasks
+  ansible.builtin.include_tasks: filters.yml
 
-- include_tasks: handlers.yml
+- name: Include handlers tasks
+  ansible.builtin.include_tasks: handlers.yml
 
-- include_tasks: checks.yml
+- name: Include checks tasks
+  ansible.builtin.include_tasks: checks.yml
 
-- include_tasks: rbac.yml
+- name: Include RBAC tasks
+  ansible.builtin.include_tasks: rbac.yml
