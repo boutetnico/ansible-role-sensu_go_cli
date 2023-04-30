@@ -14,4 +14,5 @@
       --username {{ sensu_cli_username }}
       --password {{ sensu_cli_password }}
       --format {{ sensu_cli_format }}
+  changed_when: false
   when: _sensuctl_config.rc != 0
