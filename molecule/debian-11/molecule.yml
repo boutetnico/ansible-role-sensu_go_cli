@@ -1,6 +1,6 @@
 ---
 platforms:
-  - name: ansible-role-sensu-go-cli-debian-11
+  - name: ansible-role-sensu_go_cli-debian-11
     image: debian:11
     command: /lib/systemd/systemd
     tmpfs:

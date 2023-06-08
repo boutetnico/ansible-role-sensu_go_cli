@@ -3,5 +3,5 @@ collections:
   - sensu.sensu_go
 
 roles:
-  - src: https://github.com/boutetnico/ansible-role-sensu-go-backend.git
+  - src: https://github.com/boutetnico/ansible-role-sensu_go_backend.git
     name: boutetnico.sensu_go_backend
